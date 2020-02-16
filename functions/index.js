@@ -14,7 +14,7 @@ const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://fyp-cloud-83c3b.firebaseio.com/'
+  databaseURL: 'https://'+projectId+'.firebaseio.com/'
 });
 
 ///////////////////// Create DB fileStoreDetails when file is uploaded ////////////////////////////////
@@ -32,7 +32,7 @@ exports.onFileChange = functions.storage
     const fileRef = admin.database().ref('fileStoreDetails').child(`${childFilePath}`);
 
     return fileRef.set({
-      URL: "gs://fyp-cloud-83c3b.appspot.com/" + `${filePath}`,
+      URL: "gs://"+projectId+".appspot.com/" + `${filePath}`,
       availableDeviceIDs: null,
       fileName: `${object.name}`,
       format: `${contentType}`,
